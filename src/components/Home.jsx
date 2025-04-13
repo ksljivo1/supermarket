@@ -15,7 +15,7 @@ export default function Home() {
                     Order your groceries from <em>SuperM</em> with our easy to use app,
                     and get your products delivered straight to your doorstep.
                 </p>
-                <a to="/products" className="btn btn-default" onClick={handleOnStartShoppingButtonClick}>
+                <a className="btn btn-default" onClick={handleOnStartShoppingButtonClick}>
                     Start shopping
                 </a>
             </div>
