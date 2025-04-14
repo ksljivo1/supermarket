@@ -1,15 +1,21 @@
-import Product from "./Product.jsx"
-import useFetch from "../hooks/useFetch.js"
-import {useEffect, useState} from "react"
-import Loader from "./Loader.jsx"
+import { useState, useEffect } from "react";
+import Product from "./Product.jsx";
+import useFetch from "../hooks/useFetch.js";
+import Loader from "./Loader.jsx";
 
 export default function Products() {
-    const {get, loading} = useFetch("https://react-tutorial-demo.firebaseio.com/")
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const { get, loading } = useFetch(
+        "https://react-tutorial-demo.firebaseio.com/"
+    );
 
     useEffect(() => {
-        get("supermarket.json").then(result => setProducts(result))
-    }, [])
+        get("supermarket.json")
+            .then((data) => {
+                setProducts(data);
+            })
+            .catch((error) => console.log("Could not load products", error));
+    }, []);
 
     return (
         <div className="products-layout">
@@ -17,10 +23,12 @@ export default function Products() {
             <p>Take a look at our products</p>
             <div className="products-grid">
                 {loading && <Loader />}
-                {products && products.map((product) => {
-                    return <div key={product.id} className="products-grid"><Product image={product.image} name={product.name} description={product.description} price={product.price}/></div>
+                {products.map((product) => {
+                    return (
+                        <Product key={product.id} id={product.id} details={product}></Product>
+                    );
                 })}
             </div>
         </div>
-    )
+    );
 }
