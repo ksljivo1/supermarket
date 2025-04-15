@@ -1,15 +1,16 @@
-import Button from "./Button.jsx"
-import {useOutletContext} from "react-router-dom"
+import {useOutletContext} from "react-router-dom";
+import Button from "./Button.jsx";
 
-export default function ProductDetailInfo() {
-    const {description, price} = useOutletContext()
+export default function ProductDetailInfo({onProductAdd}) {
+    const product = useOutletContext();
 
     return (
         <>
             <p>
-                {description} sold at <strong>{price}</strong> per piece.
+                {product.description} sold at <strong>${product.price}</strong> per
+                piece.
             </p>
-            <Button className="btn-outline">${price}</Button>
+            <Button onClick={() => onProductAdd(product)}>${product.price}</Button>
         </>
-    )
+    );
 }

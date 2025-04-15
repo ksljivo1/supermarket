@@ -3,7 +3,7 @@ import Product from "./Product.jsx";
 import useFetch from "../hooks/useFetch.js";
 import Loader from "./Loader.jsx";
 
-export default function Products() {
+export default function Products(props) {
     const [products, setProducts] = useState([]);
     const { get, loading } = useFetch(
         "https://react-tutorial-demo.firebaseio.com/"
@@ -23,9 +23,14 @@ export default function Products() {
             <p>Take a look at our products</p>
             <div className="products-grid">
                 {loading && <Loader />}
-                {products.map((product) => {
+                {products.length !== 0 && products.map((product) => {
                     return (
-                        <Product key={product.id} id={product.id} details={product}></Product>
+                        <Product cart={props.cart}
+                                 key={product.id}
+                                 id={product.id}
+                                 details={product}
+                                 onProductAdd={props.onProductAdd}
+                                 onProductDelete={props.onProductDelete} />
                     );
                 })}
             </div>
