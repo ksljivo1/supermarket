@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import Button from "./Button.jsx";
+import {useContext} from "react"
+import {AppContext} from "../contexts/AppContext.jsx"
 
 export default function Product(props) {
-    const { details, cart } = props;
-    const totalQuantity = cart.filter(product => product.id === details.id).reduce((acc, currValue) => {return acc + currValue.quantity}, 0)
+    const {details} = props
+    const {getProductFromCart, onProductAdd, onProductDelete} = useContext(AppContext)
+    const productFromCart = getProductFromCart(details.id)
+    const quantity = productFromCart ? productFromCart.quantity : 0;
 
     return (
         <div className="product">
@@ -17,12 +21,11 @@ export default function Product(props) {
                         alt={details.name}
                     />
                 </Link>
-                {
-                    totalQuantity !== 0 &&
+                {quantity > 0 && (
                     <div className="product-quantity-container">
-                        <div className="product-quantity">{totalQuantity}</div>
+                        <div className="product-quantity">{quantity}</div>
                     </div>
-                }
+                )}
             </div>
             <div className="product-info">
                 <h3>{details.name}</h3>
@@ -30,13 +33,11 @@ export default function Product(props) {
             </div>
             <div className="product-checkout">
                 <div>
-                    <Button
-                        outline
-                        onClick={() => props.onProductDelete(details.id)}
-                        className="product-delete"
-                    >x</Button>
+                    {quantity > 0 && (
+                        <Button outline onClick={() => onProductDelete(details.id)} className="product-delete">x</Button>
+                    )}
                 </div>
-                <Button outline onClick={() => props.onProductAdd(details)}>
+                <Button outline onClick={() => onProductAdd(details)}>
                     ${details.price}
                 </Button>
             </div>
