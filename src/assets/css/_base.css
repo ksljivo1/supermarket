@@ -22,6 +22,9 @@
     --accent-3: #de7699;
     --accent-4: #e6c3ce;
     --accent-5: #fff2f7;
+
+    --surface-color: white;
+    --surface-shadow: #c4c4c4;
 }
 
 body {

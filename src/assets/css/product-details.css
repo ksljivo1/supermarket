@@ -1,6 +1,6 @@
 /* product details page */
 .product-details-image {
-    background-color: white;
+    background-color: var(--surface-color);
     padding: 10px;
     border-radius: 20px;
 }
@@ -13,7 +13,7 @@
 .table thead {
     background-color: var(--primary-1);
     color: white;
-    border: 1px solid white;
+    border: 1px solid var(--surface-color);
     border-top: 0;
 }
 .table.table-cart thead {
@@ -28,7 +28,7 @@
 
 .table tbody {
     font-size: 18px;
-    border: 1px solid white;
+    border: 1px solid var(--surface-color);
 }
 
 .table-cart {
@@ -46,7 +46,7 @@
 }
 
 .table tbody tr:nth-child(2n) {
-    background-color: white;
+    background-color: var(--surface-color);
 }
 
 .table tbody tr:nth-child(2n + 1) {

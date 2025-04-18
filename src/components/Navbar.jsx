@@ -1,10 +1,29 @@
 import { NavLink } from "react-router-dom";
-import {useContext} from "react"
+import {useContext, useEffect, useState} from "react"
 import {AppContext} from "../contexts/AppContext.jsx"
+import Button from "./Button.jsx";
 
 export default function Navbar() {
+    const [isDarkTheme, setIsDarkTheme] = useState(false)
     const {getCartCount} = useContext(AppContext)
     const cartCount = getCartCount()
+
+    useEffect(() => {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+            setIsDarkTheme(true)
+    }, []);
+
+    useEffect(() => {
+        if (isDarkTheme) {
+            document.body.classList.add("dark")
+        } else {
+            document.body.classList.remove("dark")
+        }
+    }, [isDarkTheme]);
+
+    function handleThemeClick() {
+        setIsDarkTheme(!isDarkTheme)
+    }
 
     return (
         <nav className="navbar">
@@ -12,6 +31,9 @@ export default function Navbar() {
                 SuperM
             </NavLink>
             <ul>
+                <li className="nav-item">
+                    <Button onClick={handleThemeClick} className="theme-switcher">{isDarkTheme ? "Light" : "Dark"}</Button>
+                </li>
                 <li className="nav-item">
                     <NavLink className={({isActive}) => isActive ? "active" : ""} to="/">
                         Home
