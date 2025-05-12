@@ -7,7 +7,6 @@ import About from "./components/About.jsx";
 import Products from "./components/Products.jsx";
 import ProductDetails from "./components/ProductDetails.jsx";
 import ProductDetailInfo from "./components/ProductDetailInfo.jsx";
-import ProductDetailNutrition from "./components/ProductDetailNutrition.jsx";
 import ProductDetailStorage from "./components/ProductDetailStorage.jsx";
 import Cart from "./components/Cart.jsx";
 import {AppProvider} from "./contexts/AppContext.jsx";
@@ -33,11 +32,6 @@ export default function App() {
                             <Route
                                 path=""
                                 element={<ProductDetailInfo  />}
-                            ></Route>
-
-                            <Route
-                                path="nutrition"
-                                element={<ProductDetailNutrition />}
                             ></Route>
 
                             <Route path="storage" element={<ProductDetailStorage />}></Route>

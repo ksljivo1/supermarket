@@ -4,13 +4,13 @@ import useFetch from "../hooks/useFetch.js";
 import Loader from "./Loader.jsx";
 
 export default function Products() {
+    const baseUrl = "http://localhost:5255/api/" ///"https://react-tutorial-demo.firebaseio.com/"
+    const url = "products" ///"supermarket.json"
     const [products, setProducts] = useState([]);
-    const { get, loading } = useFetch(
-        "https://react-tutorial-demo.firebaseio.com/"
-    );
+    const { get, loading } = useFetch(baseUrl);
 
     useEffect(() => {
-        get("supermarket.json")
+        get(url)
             .then((data) => {
                 setProducts(data);
             })

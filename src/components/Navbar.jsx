@@ -25,6 +25,12 @@ export default function Navbar() {
         setIsDarkTheme(!isDarkTheme)
     }
 
+    function test() {
+        fetch("http://localhost:5255/api/test")
+            .then(res => res.json())
+            .then(data => console.log("temperature is", data.temp, "celsius"))
+    }
+
     return (
         <nav className="navbar">
             <NavLink to="/" className="nav-brand">
@@ -35,7 +41,7 @@ export default function Navbar() {
                     <Button onClick={handleThemeClick} className="theme-switcher">{isDarkTheme ? "Light" : "Dark"}</Button>
                 </li>
                 <li className="nav-item">
-                    <NavLink className={({isActive}) => isActive ? "active" : ""} to="/">
+                    <NavLink onClick={test} className={({isActive}) => isActive ? "active" : ""} to="/">
                         Home
                     </NavLink>
                 </li>
